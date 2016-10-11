@@ -52,8 +52,13 @@ au BufNewFile,BufRead *.py
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
-au BufRead,BufNewFile *.c set noexpandtab
-au BufRead,BufNewFile *.h set noexpandtab
+    \ set makeprg=python3\ -i\ % |
+au BufRead,BufNewFile *.c,*.cpp,*.h
+    \ set expandtab |
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set textwidth=79 |
 au BufRead,BufNewFile Makefile* set noexpandtab
 " Misc
 colorscheme solarized
