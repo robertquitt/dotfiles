@@ -220,5 +220,5 @@ ParseGitBranch() {
 eval `dircolors ~/.dircolors`
 set -o physical
 # export PS1="\[\e]0;\w\a\]\[\e[32m\]\u@\h\[\e[37m\]:\[\e[33m\]\w\[\e[32m\]\$(ParseGitBranch)\[\e[0m\] \$ "
-export PS1="\[\e]0;\w\a\]\[\e[32m\]\u@\h\[\e[37m\]:\[\e[33m\]\w\e[0m\] \$ "
+export PS1="\[\e]0;\w\a\]\[\e[32m\]\u@\h\[\e[37m\]:\[\e[33m\]\w\[\e[0m\] \$ "
 
