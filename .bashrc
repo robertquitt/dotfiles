@@ -1,41 +1,8 @@
-# To the extent possible under law, the author(s) have dedicated all 
-# copyright and related and neighboring rights to this software to the 
-# public domain worldwide. This software is distributed without any warranty. 
-# You should have received a copy of the CC0 Public Domain Dedication along 
-# with this software. 
-# If not, see <http://creativecommons.org/publicdomain/zero/1.0/>. 
-
-# base-files version 4.2-4
-
-# ~/.bashrc: executed by bash(1) for interactive shells.
-
-# The latest version as installed by the Cygwin Setup program can
-# always be found at /etc/defaults/etc/skel/.bashrc
-
-# Modifying /etc/skel/.bashrc directly will prevent
-# setup from updating it.
-
-# The copy in your home directory (~/.bashrc) is yours, please
-# feel free to customise it to create a shell
-# environment to your liking.  If you feel a change
-# would be benifitial to all, please feel free to send
-# a patch to the cygwin mailing list.
-
-# User dependent .bashrc file
+# Robert's .bashrc for cygwin
 
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
-# Shell Options
-#
-# See man bash for more options...
-#
-# Don't wait for job termination notification
-# set -o notify
-#
-# Don't use ^D to exit
-# set -o ignoreeof
-#
 # Use case-insensitive filename globbing
 shopt -s nocaseglob
 #
@@ -114,98 +81,11 @@ alias ll='ls -l'                              # long list
 alias la='ls -A'                              # all but . and ..
 alias l='ls -CF'                              #
 
-# Umask
-#
-# /etc/profile sets 022, removing write perms to group + others.
-# Set a more restrictive umask: i.e. no exec perms for others:
-# umask 027
-# Paranoid: neither group nor others have any perms:
-# umask 077
-
-# Functions
-#
-# Some people use a different file for functions
-# if [ -f "${HOME}/.bash_functions" ]; then
-#   source "${HOME}/.bash_functions"
-# fi
-#
-# Some example functions:
-#
-# a) function settitle
-# settitle () 
-# { 
-#   echo -ne "\e]2;$@\a\e]1;$@\a"; 
-# }
-# 
-# b) function cd_func
-# This function defines a 'cd' replacement function capable of keeping, 
-# displaying and accessing history of visited directories, up to 10 entries.
-# To use it, uncomment it, source this file and try 'cd --'.
-# acd_func 1.0.5, 10-nov-2004
-# Petar Marinov, http:/geocities.com/h2428, this is public domain
-# cd_func ()
-# {
-#   local x2 the_new_dir adir index
-#   local -i cnt
-# 
-#   if [[ $1 ==  "--" ]]; then
-#     dirs -v
-#     return 0
-#   fi
-# 
-#   the_new_dir=$1
-#   [[ -z $1 ]] && the_new_dir=$HOME
-# 
-#   if [[ ${the_new_dir:0:1} == '-' ]]; then
-#     #
-#     # Extract dir N from dirs
-#     index=${the_new_dir:1}
-#     [[ -z $index ]] && index=1
-#     adir=$(dirs +$index)
-#     [[ -z $adir ]] && return 1
-#     the_new_dir=$adir
-#   fi
-# 
-#   #
-#   # '~' has to be substituted by ${HOME}
-#   [[ ${the_new_dir:0:1} == '~' ]] && the_new_dir="${HOME}${the_new_dir:1}"
-# 
-#   #
-#   # Now change to the new dir and add to the top of the stack
-#   pushd "${the_new_dir}" > /dev/null
-#   [[ $? -ne 0 ]] && return 1
-#   the_new_dir=$(pwd)
-# 
-#   #
-#   # Trim down everything beyond 11th entry
-#   popd -n +11 2>/dev/null 1>/dev/null
-# 
-#   #
-#   # Remove any other occurence of this dir, skipping the top of the stack
-#   for ((cnt=1; cnt <= 10; cnt++)); do
-#     x2=$(dirs +${cnt} 2>/dev/null)
-#     [[ $? -ne 0 ]] && return 0
-#     [[ ${x2:0:1} == '~' ]] && x2="${HOME}${x2:1}"
-#     if [[ "${x2}" == "${the_new_dir}" ]]; then
-#       popd -n +$cnt 2>/dev/null 1>/dev/null
-#       cnt=cnt-1
-#     fi
-#   done
-# 
-#   return 0
-# }
-# 
-# alias cd=cd_func
-# Prepend to path without duplicates
-
-pathadd() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="$1:${PATH:+"$PATH"}"
-    fi
+settitle ()
+{
+  echo -ne "\e]2;$@\a\e]1;$@\a";
 }
 
-# Add Anaconda to path
-pathadd "$HOME/anaconda3/bin"
 # Prepend to path without duplicates
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -217,8 +97,6 @@ ParseGitBranch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-eval `dircolors ~/.dircolors`
-set -o physical
 # export PS1="\[\e]0;\w\a\]\[\e[32m\]\u@\h\[\e[37m\]:\[\e[33m\]\w\[\e[32m\]\$(ParseGitBranch)\[\e[0m\] \$ "
 export PS1="\[\e]0;\w\a\]\[\e[32m\]\u@\h\[\e[37m\]:\[\e[33m\]\w\[\e[0m\] \$ "
 
