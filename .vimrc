@@ -1,4 +1,6 @@
 " robert's vimrc
+" designed for use with MinTTY/Git Bash
+" see <https://github.com/mintty/mintty/wiki/Keycodes>
 
 " command behavior
 set showcmd
@@ -12,31 +14,30 @@ set so=5
 set colorcolumn=80
 set cmdheight=2
 
+" list characters
+set listchars=tab:│·,extends:→,eol:¬
+
+" \+l to toggle listing characters
+nmap <Leader>l :set invlist<CR>
+
+" wrap behavior
+set textwidth=79
+
 " indent behavior
 set autoindent
 set smartindent
-
-au BufRead,BufNewFile *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set expandtab |
-
-au BufRead,BufNewFile *.c,*.cpp,*.h
-    \ set expandtab |
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-
-au BufRead,BufNewFile Makefile*
-    \ set noexpandtab
 
 " split behavior
 set splitright
 set splitbelow
 
-" rebind
+" F5 to toggle paste mode
 set pastetoggle=<F5>
+
+" Ctrl+A to select all
+nnoremap <C-A> ggVG
+
+" backspace goes to indent
 set backspace=indent,eol,start
 
 " file behavior
@@ -48,7 +49,6 @@ set autoread
 " plugin config
 set nocompatible
 filetype off
-
 
 " plugins
 call plug#begin('~/.vim/plugged')
@@ -93,10 +93,19 @@ Plug 'christoomey/vim-tmux-navigator'
 " remove trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
 
+" deliminate for insert mode auto-completion
+Plug 'raimondi/delimitmate'
+
+" detect indent settings
+Plug 'ciaranm/detectindent'
+
 call plug#end()
 
-" Tagbar config
-nmap <F8> :TagbarToggle<CR>
+" F7 toggles NerdTree
+nnoremap <silent> <F7> :NERDTreeToggle<CR>
+
+" F8 toggles Tagbar
+nnoremap <silent> <F8> :TagbarToggle<CR>
 
 " colors
 colorscheme molokai
@@ -105,13 +114,32 @@ set background=dark
 syntax on
 
 " sublime-style commenting with Ctrl+/
-" Git bash/this terminal handles Ctrl+/ as Ctrl+_
+" MinTTY handles Ctrl+/ as Ctrl+_
 vmap <C-_> <Plug>Commentary
+imap <C-_> <C-O><Plug>CommentaryLine
 nmap <C-_> <Plug>CommentaryLine
 
-" vim/tmux navigations using Alt+hjkl
-nnoremap <M-J> :TmuxNavigateDown<CR>
-nnoremap <M-K> :TmuxNavigateUp<CR>
-nnoremap <M-L> :TmuxNavigateLeft<CR>
-nnoremap <M-H> :TmuxNavigateRight<CR>
+" tmux split navigation using Alt+HJKL
+" need to use escape sequence due to how MinTTY handles Alt
+execute "set <M-H>=h"
+execute "set <M-J>=j"
+execute "set <M-K>=k"
+execute "set <M-L>=l"
+
+" switch to normal mode immediately after ESC is pressed and avoid ESC
+" aliasing with Alt
+set ttimeoutlen=0
+
+" map the tmux navigations
+" disable default Ctrl+HJKL mappings
+let g:tmux_navigator_no_mappings = 1
+" remap to Alt+HJKL
+nnoremap <silent> <M-J> :TmuxNavigateDown<CR>
+nnoremap <silent> <M-K> :TmuxNavigateUp<CR>
+nnoremap <silent> <M-L> :TmuxNavigateRight<CR>
+nnoremap <silent> <M-H> :TmuxNavigateLeft<CR>
+inoremap <silent> <M-J> <C-O>:TmuxNavigateDown<CR>
+inoremap <silent> <M-K> <C-O>:TmuxNavigateUp<CR>
+inoremap <silent> <M-L> <C-O>:TmuxNavigateRight<CR>
+inoremap <silent> <M-H> <C-O>:TmuxNavigateLeft<CR>
 
