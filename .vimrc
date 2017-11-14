@@ -99,6 +99,12 @@ Plug 'raimondi/delimitmate'
 " detect indent settings
 Plug 'ciaranm/detectindent'
 
+" for editing nginx .conf files
+Plug 'chr4/nginx.vim'
+
+" php syntax
+Plug 'stanangeloff/php.vim'
+
 call plug#end()
 
 " F7 toggles NerdTree
@@ -142,4 +148,3 @@ inoremap <silent> <M-J> <C-O>:TmuxNavigateDown<CR>
 inoremap <silent> <M-K> <C-O>:TmuxNavigateUp<CR>
 inoremap <silent> <M-L> <C-O>:TmuxNavigateRight<CR>
 inoremap <silent> <M-H> <C-O>:TmuxNavigateLeft<CR>
-
