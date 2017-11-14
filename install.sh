@@ -1,7 +1,7 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo Installing dotfiles in $DIR \n
+echo Installing dotfiles from $DIR
 
 if [ ! -e ~/.vim/autoload/plug.vim ]; then
   echo Installing vim-plug...
@@ -9,9 +9,10 @@ if [ ! -e ~/.vim/autoload/plug.vim ]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-cp $DIR/.vimrc ~/.vimrc
+cp -iv $DIR/.vimrc ~/.vimrc
+cp -iv $DIR/.tmux.conf ~/.tmux.conf
 
-echo Installing Vim plugins \n
+echo Installing Vim plugins
 
 vim -E -c "PlugInstall" -c "q" -c "q"
 
