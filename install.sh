@@ -9,9 +9,10 @@ if [ ! -e ~/.vim/autoload/plug.vim ]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-cp -iv $DIR/.vimrc ~/.vimrc
-cp -iv $DIR/.tmux.conf ~/.tmux.conf
-cp -iv $DIR/.gitconfig ~/.gitconfig
+for FILE in .vimrc .tmux.conf .gitconfig .ssh/authorized_keys
+do
+  diff -q $DIR/$FILE ~/$FILE || cp -i -v $DIR/$FILE ~/$FILE
+done
 
 echo Installing Vim plugins
 
