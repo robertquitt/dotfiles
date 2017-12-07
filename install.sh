@@ -11,6 +11,7 @@ fi
 
 cp -iv $DIR/.vimrc ~/.vimrc
 cp -iv $DIR/.tmux.conf ~/.tmux.conf
+cp -iv $DIR/.gitconfig ~/.gitconfig
 
 echo Installing Vim plugins
 
