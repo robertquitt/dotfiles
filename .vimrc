@@ -54,7 +54,14 @@ set autoread
 
 " plugin config
 set nocompatible
-" filetype off
+
+" gVim settings
+if has("gui_running")
+	set background=light
+	set guifont=Ubuntu_Mono:h14:cANSI:qDRAFT
+else
+	set background=dark
+endif
 
 " plugins
 call plug#begin('~/.vim/plugged')
@@ -78,9 +85,6 @@ Plug 'tpope/vim-surround'
 " Fugitive
 Plug 'tpope/vim-fugitive'
 
-" easy motions
-Plug 'easymotion/vim-easymotion'
-
 " comfy colorscheme
 Plug 'tomasr/molokai'
 
@@ -98,9 +102,6 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " remove trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
-
-" deliminate for insert mode auto-completion
-Plug 'raimondi/delimitmate'
 
 " detect indent settings
 Plug 'ciaranm/detectindent'
@@ -130,7 +131,6 @@ syntax on
 " sublime-style commenting with Ctrl+/
 " MinTTY handles Ctrl+/ as Ctrl+_
 vmap <C-_> <Plug>Commentary
-imap <C-_> <C-O><Plug>CommentaryLine
 nmap <C-_> <Plug>CommentaryLine
 
 " MinTTY-Specific settings!
