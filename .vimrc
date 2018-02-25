@@ -2,7 +2,6 @@
 " robertquitt@berkeley.edu
 " ver. 2017-12-06
 " designed for use with MinTTY/Git Bash
-" see <https://github.com/mintty/mintty/wiki/Keycodes>
 
 " command behavior
 set showcmd
@@ -17,7 +16,7 @@ set colorcolumn=80
 set cmdheight=2
 
 " list characters
-set listchars=tab:│·,extends:→,eol:¬
+set listchars=tab:\|-,extends:>,precedes:<,nbsp:.,trail:.,eol:¬
 
 " \+l to toggle listing characters
 nnoremap <Leader>l :set invlist<CR>
@@ -134,11 +133,20 @@ vmap <C-_> <Plug>Commentary
 imap <C-_> <C-O><Plug>CommentaryLine
 nmap <C-_> <Plug>CommentaryLine
 
+" MinTTY-Specific settings!
+" see <https://github.com/mintty/mintty/wiki/Tips>
+" see <https://github.com/mintty/mintty/wiki/Keycodes>
+
 " need to use escape sequence due to how MinTTY handles Alt
 execute "set <M-H>=h"
 execute "set <M-J>=j"
 execute "set <M-K>=k"
 execute "set <M-L>=l"
+
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
 
 " switch to normal mode immediately after ESC is pressed and avoid ESC
 " aliasing with Alt
