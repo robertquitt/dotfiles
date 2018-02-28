@@ -2,7 +2,6 @@
 " robertquitt@berkeley.edu
 " ver. 2017-12-06
 " designed for use with MinTTY/Git Bash
-" see <https://github.com/mintty/mintty/wiki/Keycodes>
 
 " command behavior
 set showcmd
@@ -17,7 +16,7 @@ set colorcolumn=80
 set cmdheight=2
 
 " list characters
-set listchars=tab:│·,extends:→,eol:¬
+set listchars=tab:\|-,extends:>,precedes:<,nbsp:.,trail:.,eol:¬
 
 " \+l to toggle listing characters
 nnoremap <Leader>l :set invlist<CR>
@@ -55,7 +54,14 @@ set autoread
 
 " plugin config
 set nocompatible
-" filetype off
+
+" gVim settings
+if has("gui_running")
+	set background=light
+	set guifont=Ubuntu_Mono:h14:cANSI:qDRAFT
+else
+	set background=dark
+endif
 
 " plugins
 call plug#begin('~/.vim/plugged')
@@ -79,9 +85,6 @@ Plug 'tpope/vim-surround'
 " Fugitive
 Plug 'tpope/vim-fugitive'
 
-" easy motions
-Plug 'easymotion/vim-easymotion'
-
 " comfy colorscheme
 Plug 'tomasr/molokai'
 
@@ -99,9 +102,6 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " remove trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
-
-" deliminate for insert mode auto-completion
-Plug 'raimondi/delimitmate'
 
 " detect indent settings
 Plug 'ciaranm/detectindent'
@@ -131,14 +131,22 @@ syntax on
 " sublime-style commenting with Ctrl+/
 " MinTTY handles Ctrl+/ as Ctrl+_
 vmap <C-_> <Plug>Commentary
-imap <C-_> <C-O><Plug>CommentaryLine
 nmap <C-_> <Plug>CommentaryLine
+
+" MinTTY-Specific settings!
+" see <https://github.com/mintty/mintty/wiki/Tips>
+" see <https://github.com/mintty/mintty/wiki/Keycodes>
 
 " need to use escape sequence due to how MinTTY handles Alt
 execute "set <M-H>=h"
 execute "set <M-J>=j"
 execute "set <M-K>=k"
 execute "set <M-L>=l"
+
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
 
 " switch to normal mode immediately after ESC is pressed and avoid ESC
 " aliasing with Alt
