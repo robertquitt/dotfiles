@@ -2,6 +2,7 @@
 " robertquitt@berkeley.edu
 " ver. 2017-12-06
 " designed for use with MinTTY/Git Bash
+" see <https://github.com/mintty/mintty/wiki/Keycodes>
 
 " command behavior
 set showcmd
@@ -85,6 +86,9 @@ Plug 'tpope/vim-surround'
 " Fugitive
 Plug 'tpope/vim-fugitive'
 
+" easy motions
+Plug 'easymotion/vim-easymotion'
+
 " comfy colorscheme
 Plug 'tomasr/molokai'
 
@@ -102,6 +106,9 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " remove trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
+
+" deliminate for insert mode auto-completion
+Plug 'raimondi/delimitmate'
 
 " detect indent settings
 Plug 'ciaranm/detectindent'
@@ -131,6 +138,7 @@ syntax on
 " sublime-style commenting with Ctrl+/
 " MinTTY handles Ctrl+/ as Ctrl+_
 vmap <C-_> <Plug>Commentary
+imap <C-_> <C-O><Plug>CommentaryLine
 nmap <C-_> <Plug>CommentaryLine
 
 " MinTTY-Specific settings!
@@ -160,7 +168,7 @@ nnoremap <silent> <C-J> :TmuxNavigateDown<CR>
 nnoremap <silent> <C-K> :TmuxNavigateUp<CR>
 nnoremap <silent> <C-L> :TmuxNavigateRight<CR>
 nnoremap <silent> <C-H> :TmuxNavigateLeft<CR>
-" handle Alt+HJKL as well (doesn't work well on certain other terminals)
+" handle Alt+HJKL as well (this doesn't work well on certain other terminals)
 nnoremap <silent> <M-J> :TmuxNavigateDown<CR>
 nnoremap <silent> <M-K> :TmuxNavigateUp<CR>
 nnoremap <silent> <M-L> :TmuxNavigateRight<CR>
