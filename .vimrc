@@ -8,6 +8,9 @@
 set showcmd
 set wildmenu
 
+" Use the built-in :help when navigating help use "K"
+autocmd FileType help setlocal keywordprg=:help
+
 " editor overall looks
 set ruler
 set number
@@ -118,6 +121,11 @@ Plug 'chr4/nginx.vim'
 
 " php syntax
 Plug 'stanangeloff/php.vim'
+
+" jsx syntax and indenting
+Plug 'mxw/vim-jsx'
+
+Plug 'greymd/oscyank.vim'
 
 call plug#end()
 
