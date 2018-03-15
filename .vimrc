@@ -23,7 +23,7 @@ set cmdheight=2
 set listchars=tab:\|-,extends:>,precedes:<,nbsp:.,trail:.,eol:¬
 
 " \+l to toggle listing characters
-nnoremap <Leader>l :set invlist<CR>
+nnoremap <silent> <Leader>l :set invlist<CR>
 
 " wrap behavior
 set textwidth=79
@@ -110,8 +110,8 @@ Plug 'christoomey/vim-tmux-navigator'
 " remove trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
 
-" deliminate for insert mode auto-completion
-Plug 'raimondi/delimitmate'
+" Pair branckets in insert mode
+Plug 'jiangmiao/auto-pairs'
 
 " detect indent settings
 Plug 'ciaranm/detectindent'
@@ -128,8 +128,8 @@ Plug 'greymd/oscyank.vim'
 
 call plug#end()
 
-" F7 toggles NerdTree
-nnoremap <silent> <Leader>7 :NERDTreeToggle<CR>
+" F7 or \ + t toggles NerdTree
+nnoremap <silent> <Leader>t :NERDTreeToggle<CR>
 nnoremap <silent> <F7> :NERDTreeToggle<CR>
 
 " F8 toggles Tagbar
@@ -149,8 +149,8 @@ imap <C-_> <C-O><Plug>CommentaryLine
 nmap <C-_> <Plug>CommentaryLine
 
 " copy across ssh/tmux using OSC 52 Codes
-noremap <leader>y :Oscyank<cr>
 
+noremap <leader>y :Oscyank<cr>
 " MinTTY-Specific settings!
 " see <https://github.com/mintty/mintty/wiki/Tips>
 " see <https://github.com/mintty/mintty/wiki/Keycodes>
