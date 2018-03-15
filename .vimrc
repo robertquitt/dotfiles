@@ -2,10 +2,14 @@
 " robertquitt@berkeley.edu
 " ver. 2017-12-06
 " designed for use with MinTTY/Git Bash
+" see <https://github.com/mintty/mintty/wiki/Keycodes>
 
 " command behavior
 set showcmd
 set wildmenu
+
+" Use the built-in :help when navigating help use "K"
+autocmd FileType help setlocal keywordprg=:help
 
 " editor overall looks
 set ruler
@@ -67,34 +71,37 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " NERDTree
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " commenting stuff
 Plug 'tpope/vim-commentary'
 
 " .tmux.conf syntax highlighting
-Plug 'tmux-plugins/vim-tmux'
+Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux'}
 
-" airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" airline (status bar at bottom)
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 
-" Surround
+" Vim-surround to quickly change surrounding characters
 Plug 'tpope/vim-surround'
 
-" Fugitive
+" Fugitive - Git plugin
 Plug 'tpope/vim-fugitive'
+
+" easy motions - use \\<motion>
+Plug 'easymotion/vim-easymotion'
 
 " comfy colorscheme
 Plug 'tomasr/molokai'
 
-" Tagbar
+" Tagbar for viewing tags in side window
 Plug 'majutsushi/tagbar'
 
-" Better javascript support
-Plug 'pangloss/vim-javascript'
+" Better javascript syntax support, jsx syntax and indenting
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 
-" dating increments
+" dating increments (use Ctrl-A and Ctrl-X)
 Plug 'tpope/vim-speeddating'
 
 " vim/tmux navigation
@@ -103,14 +110,21 @@ Plug 'christoomey/vim-tmux-navigator'
 " remove trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
 
+" deliminate for insert mode auto-completion
+Plug 'raimondi/delimitmate'
+
 " detect indent settings
 Plug 'ciaranm/detectindent'
 
 " for editing nginx .conf files
-Plug 'chr4/nginx.vim'
+Plug 'chr4/nginx.vim', { 'for': 'nginx' }
 
 " php syntax
-Plug 'stanangeloff/php.vim'
+Plug 'stanangeloff/php.vim', { 'for': 'php' }
+
+" yank to system clipboard using OSC 52 terminal escape sequence
+" (has to be enabled in terminal settings)
+Plug 'greymd/oscyank.vim'
 
 call plug#end()
 
@@ -131,7 +145,11 @@ syntax on
 " sublime-style commenting with Ctrl+/
 " MinTTY handles Ctrl+/ as Ctrl+_
 vmap <C-_> <Plug>Commentary
+imap <C-_> <C-O><Plug>CommentaryLine
 nmap <C-_> <Plug>CommentaryLine
+
+" copy across ssh/tmux using OSC 52 Codes
+noremap <leader>y :Oscyank<cr>
 
 " MinTTY-Specific settings!
 " see <https://github.com/mintty/mintty/wiki/Tips>
@@ -160,7 +178,7 @@ nnoremap <silent> <C-J> :TmuxNavigateDown<CR>
 nnoremap <silent> <C-K> :TmuxNavigateUp<CR>
 nnoremap <silent> <C-L> :TmuxNavigateRight<CR>
 nnoremap <silent> <C-H> :TmuxNavigateLeft<CR>
-" handle Alt+HJKL as well (doesn't work well on certain other terminals)
+" handle Alt+HJKL as well (this doesn't work well on certain other terminals)
 nnoremap <silent> <M-J> :TmuxNavigateDown<CR>
 nnoremap <silent> <M-K> :TmuxNavigateUp<CR>
 nnoremap <silent> <M-L> :TmuxNavigateRight<CR>
