@@ -110,7 +110,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " remove trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
 
-" Pair branckets in insert mode
+" Pair branckets in insert mode (works better than delimitmate)
 Plug 'jiangmiao/auto-pairs'
 
 " detect indent settings
@@ -125,6 +125,15 @@ Plug 'stanangeloff/php.vim', { 'for': 'php' }
 " yank to system clipboard using OSC 52 terminal escape sequence
 " (has to be enabled in terminal settings)
 Plug 'greymd/oscyank.vim'
+
+" Pandoc formatting, syntax, integration, etc.
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+
+" Pencil used for formatting text files (a bit more lightweight than vim-pandoc)
+Plug 'reedes/vim-pencil'
+
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py', 'for': ['python', 'make'] }
 
 call plug#end()
 
