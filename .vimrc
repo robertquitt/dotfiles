@@ -126,9 +126,12 @@ Plug 'stanangeloff/php.vim', { 'for': 'php' }
 " (has to be enabled in terminal settings)
 Plug 'greymd/oscyank.vim'
 
+
+Plug 'junegunn/goyo.vim'
+
 " Pandoc formatting, syntax, integration, etc.
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc', { 'for': 'md' }
+Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'md' }
 
 " Pencil used for formatting text files (a bit more lightweight than vim-pandoc)
 Plug 'reedes/vim-pencil'
@@ -137,8 +140,8 @@ Plug 'reedes/vim-pencil'
 
 call plug#end()
 
-" F7 or \ + t toggles NerdTree
-nnoremap <silent> <Leader>t :NERDTreeToggle<CR>
+" F7 toggles NerdTree
+nnoremap <silent> <Leader>7 :NERDTreeToggle<CR>
 nnoremap <silent> <F7> :NERDTreeToggle<CR>
 
 " F8 toggles Tagbar
@@ -160,6 +163,7 @@ nmap <C-_> <Plug>CommentaryLine
 " copy across ssh/tmux using OSC 52 Codes
 
 noremap <leader>y :Oscyank<cr>
+
 " MinTTY-Specific settings!
 " see <https://github.com/mintty/mintty/wiki/Tips>
 " see <https://github.com/mintty/mintty/wiki/Keycodes>
